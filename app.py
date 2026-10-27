@@ -22,9 +22,12 @@ linear_model = joblib.load(
     os.path.join(BASE_DIR, "linear_regression.joblib")
 )
 
-rf_model = joblib.load(
-    os.path.join(BASE_DIR, "random_forest.joblib")
-)
+import gzip
+
+rf_path = os.path.join(BASE_DIR, "random_forest.joblib.gz")
+
+with gzip.open(rf_path, "rb") as file:
+    rf_model = joblib.load(file)
 
 results_path = os.path.join(
     BASE_DIR, "model_comparison.csv"
